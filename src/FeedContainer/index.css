@@ -1,0 +1,36 @@
+.feed_info {
+	font-family: Verdana, Geneva, sans-serif;
+    font-size: 7pt;
+    color: #828282;
+}
+
+.feed_title {
+	font-size: 10pt;
+	padding-right: 5px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	color: #000000;
+}
+
+.basic_dark {
+    color: #000000;
+}
+
+.basic {
+	color: #4b4b4b;
+}
+
+.content_center {
+	text-align: center;
+}
+
+.pointer_cursor {
+	cursor: pointer;
+}
+
+a:link { 
+    text-decoration: none; 
+} 
+a:hover { 
+    text-decoration: none; 
+} 
