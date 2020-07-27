@@ -20,7 +20,7 @@
   "scripts": {
     "react-start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    // "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start": "node_modules/.bin/nodemon index.js"
   },
