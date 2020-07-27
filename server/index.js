@@ -15,10 +15,10 @@ import { Provider } from 'react-redux';
 import configureStore from '../src/store';
 import App from '../src/App';
 
-router.use(express.static(path.join(__dirname, '..', 'public')));
+// router.use(express.static(path.join(__dirname, '..', 'build')));
 
 router.use('^/$', (req, res) => {
-	const filePath = path.resolve(__dirname, '..', 'public', 'index.html');
+	const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
 
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
@@ -28,7 +28,6 @@ router.use('^/$', (req, res) => {
         const store = configureStore();
 
         const html = ReactDOMServer.renderToString(<Provider store={store}><App /></Provider>);
-        console.log(html);
 
         // inject the rendered app into our html and send it
         return res.send(
@@ -39,6 +38,8 @@ router.use('^/$', (req, res) => {
         );
     });
 });
+
+router.use(express.static(path.join(__dirname, '..', 'build')));
 
 app.use(router);
 

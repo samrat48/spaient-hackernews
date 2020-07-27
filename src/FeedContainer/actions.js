@@ -7,11 +7,11 @@ import {
 import axios from 'axios';
 
 const setLocalStorage = (key, value) => {
-	window && window.localStorage.setItem(key, JSON.stringify(value))
+	typeof window !== "undefined" && window.localStorage.setItem(key, JSON.stringify(value))
 }
 
 const getLocalStorage = (key, defaultValue) => {
-	return window ? JSON.parse(window.localStorage.getItem(key)) || defaultValue : defaultValue
+	return typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem(key)) || defaultValue : defaultValue
 }
 
 export const getFeeds = (pageNmber) => {

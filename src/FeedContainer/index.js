@@ -9,10 +9,12 @@ import {
 	upvoteFeed,
 	hideFeed
 } from './actions';
-import './index.css';
 
-import CanvasJSReact from './components/canvasjs.react';
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+if(typeof window !== 'undefined') {
+	require('./index.css');
+	var CanvasJSReact = require('./components/canvasjs.react').default;
+	var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+}
 
 
 class FeedContainer extends Component {
@@ -26,8 +28,13 @@ class FeedContainer extends Component {
 	}
 
 	getPageNumber = () => {
-		const urlParams = new URLSearchParams(window.location.search);
-		return urlParams.get('page') || 1;
+		if(typeof window !== 'undefined') {
+			const urlParams = new URLSearchParams(window.location.search);
+			return urlParams.get('page') || 1;
+		}
+		else {
+			return 1;
+		}
 	}
 
 	static getDerivedStateFromProps (props, state) {
@@ -124,7 +131,7 @@ class FeedContainer extends Component {
 					  </thead>
 					  <tbody>
 					    {
-					    	this.props.pageFeed.map(feed => feed.objectID && !this.props.hiddenList[feed.objectID] ? (
+					    	this.props.pageFeed.map(feed => feed.objectID && !this.props.hiddenList[feed.objectID] && feed.title ? (
 					    		<tr key={feed.objectID}>
 							      <td className="content_center">{feed.num_comments}</td>
 							      <td className="content_center">{this.props.upvoteList[feed.objectID]}</td>
@@ -148,7 +155,7 @@ class FeedContainer extends Component {
 					    padding: '20px 0px 20px 0px'
 				      }}
 				    >
-				    <CanvasJSChart options = {options} />
+				    {typeof window != "undefined" && <CanvasJSChart options = {options} /> }
 					</div>
  				</div>
  			)
