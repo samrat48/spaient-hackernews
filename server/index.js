@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require('path');
 const app = express();
 const router = express.Router();
-
+const axios = require("axios");
 
 
 import React from 'react'
@@ -26,16 +26,28 @@ router.use('^/$', (req, res) => {
             return res.status(404).end()
         }
         const store = configureStore();
+        const preloadedState = store.getState();
+        axios
+            .get("https://hn.algolia.com/api/v1/search?page="+(req.query.page ? (Number(req.query.page)-1) : 0))
+            .then(ax_resp => {
+                preloadedState['feedReducer']['pageFeed'] = ax_resp.data.hits;
 
-        const html = ReactDOMServer.renderToString(<Provider store={store}><App /></Provider>);
+                const html = ReactDOMServer.renderToString(<Provider store={store}><App /></Provider>);
+                return res.send(
+                    htmlData.replace(
+                        '<div id="root"></div>',
+                        `<div id="root">${html}</div>
+                        <script>
+                          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g,'\\u003c')}
+                        </script>`
+                    )
+                );
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(503).send("Internal Server Error");
+            })
 
-        // inject the rendered app into our html and send it
-        return res.send(
-            htmlData.replace(
-                '<div id="root"></div>',
-                `<div id="root">${html}</div>`
-            )
-        );
     });
 });
 

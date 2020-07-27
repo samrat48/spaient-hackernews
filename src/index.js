@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
+ReactDOM.hydrate(
 <Provider store={configureStore()}>
   <React.StrictMode>
     <App />
