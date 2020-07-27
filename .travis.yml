@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 10
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "63374899-565d-486e-a9e4-8e4b6f0a27cb"
+  app: spaient-hackernews
