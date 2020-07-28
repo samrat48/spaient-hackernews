@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Stack used is derived from Create Reat App
 
-## Available Scripts
+UI: React
+Store Management: Redux with Thunk
+Design: React Bootstrap, canvasjs (Charts)
 
-In the project directory, you can run:
+Backend For serving UI
+Express
 
-### `npm start`
+Server Side Rendering:
+React Dom Server
+with baabel presets and plugins:
+	plugin-proposal-class-properties
+	plugin-transform-arrow-functions
+	preset-env
+	preset-react
+	babel-plugin-transform-import-css
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+CI: Travis CI
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Cloud: Heroku
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Approach:
+App has been created over create react app, with redux & thunk, axios used as library for API integration. and boostrap has beed used to help designing UI faster. Browser's localstorage has been used for storing human interaction.
+Then created React Dom Server's rederToString to render react to its dom elements.
+As I also used localstorage and windows element, so checked if backend then prevented default action from localstograge and wondows object.
+I haven't used Router, as we only had single route.
+Also for server side rendering, didn't used isomorphic fetch, as we only had single API to hit, I have used axios before rendering and passed data to initial state to get list of news get rendered.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Travis has been setup to deploy the app on heroku, heroku is not directly bind to github. Travis is hooked with github, on new commit push it will start the process (without branch filter). API key of heroku supplied to travis to deploy it on heroku.
