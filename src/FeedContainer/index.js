@@ -40,7 +40,8 @@ class FeedContainer extends Component {
 	static getDerivedStateFromProps (props, state) {
 		let graphFeedUpvotes = [];
 		for(let feed_id in props.upvoteList) {
-			graphFeedUpvotes.push({x: Number(feed_id), y: props.upvoteList[feed_id]})
+			if(props.pageFeed.findIndex(feed => feed.objectID === feed_id) >= 0)
+				graphFeedUpvotes.push({x: Number(feed_id), y: props.upvoteList[feed_id]})
 		}
 		if(state.graphFeedUpvotes !== graphFeedUpvotes) {
 			state.graphFeedUpvotes = graphFeedUpvotes;
